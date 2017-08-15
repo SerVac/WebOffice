@@ -1,27 +1,23 @@
 package ru.office.web.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-//@Controller
-//@RequestMapping("/office")
-@RestController
+
+//@RestController
+@RequestMapping("/offices")
+@RepositoryRestController
 public class OfficeController {
 
-    /*
-        @GetMapping("/")
-        @ResponseBody
-        @Transactional(readOnly = true)
-    */
-    @RequestMapping("/")
-    public String home() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public  @ResponseBody String home() {
         return "Hello World!";
     }
 
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+    public  @ResponseBody String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+
         model.addAttribute("name", name);
         return "greeting";
     }
