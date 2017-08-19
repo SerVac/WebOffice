@@ -1,4 +1,4 @@
-package ru.office.data;
+package ru.office.config;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
