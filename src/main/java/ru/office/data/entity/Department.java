@@ -3,6 +3,7 @@ package ru.office.data.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,6 +35,9 @@ public class Department implements Serializable {
 
 	@OneToMany(mappedBy="subDepartment")
 	private Set<Department> subDepartments = new HashSet<Department>();
+
+    @OneToMany(mappedBy="department")
+    private List<Worker> workers;
 
 	protected Department() {
 	}
