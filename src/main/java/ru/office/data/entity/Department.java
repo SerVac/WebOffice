@@ -28,15 +28,12 @@ public class Department implements Serializable {
 	@Column(nullable = false)
 	private String title;
 
-	/*@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="sub_department_id")
 	private Department subDepartment;
 
-	@OneToMany(mappedBy="sub_department")
-	private Set<Department> subDepartments = new HashSet<Department>();*/
-
-//	@ManyToOne(cascade = CascadeType.ALL)
-
+	@OneToMany(mappedBy="subDepartment")
+	private Set<Department> subDepartments = new HashSet<Department>();
 
 	protected Department() {
 	}

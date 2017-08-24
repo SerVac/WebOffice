@@ -33,21 +33,5 @@ public class OfficeAppMain extends SpringBootServletInitializer {
         (new DatabaseManagerSwingThread()).start();
 
     }
-//    public static void main(String[] args) throws Exception {
-//        SpringApplication.run(OfficeAppMain.class, args);
-//    }
-
- /*
-   public static void main1(String[] args) throws Exception {
-//        ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(
-                OfficeAppMain.class).headless(false).run(args);
-        Swing appFrame = context.getBean(Swing.class);
-        appFrame.startDBManager();
-//        AppPrincipalFrame appFrame = context.getBean(AppPrincipalFrame.class);
-//        SpringApplication app = new SpringApplication(OfficeAppMain.class);
-//        app.setBannerMode(Banner.Mode.OFF);
-//        app.run(args);
-    }*/
 
 }
