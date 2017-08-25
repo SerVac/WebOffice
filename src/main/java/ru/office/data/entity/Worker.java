@@ -1,21 +1,22 @@
 package ru.office.data.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(
-        name = "worker",
+        name = Worker.TABLE_NAME,
         uniqueConstraints = {
-                @UniqueConstraint(name="name_constraint",
+                @UniqueConstraint(name = "name_constraint",
                         columnNames = {"name", "middle_name", "last_name"})
         }
 )
 public class Worker implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    static final String TABLE_NAME = "worker";
     /*
     id
     department_id
@@ -26,10 +27,10 @@ public class Worker implements Serializable {
      birth_date
     phone (uniq)
     email (uniq)
-     */
+    */
     @Id
-    @SequenceGenerator(name = "worker_generator", sequenceName = "worker_sequence")
-    @GeneratedValue(generator = "worker_generator")
+    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
+    @GeneratedValue(generator = TABLE_NAME + "_generator")
     private Long id;
 
     @Column(nullable = false)
@@ -44,6 +45,9 @@ public class Worker implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
+    // From: http://emailregex.com/
+    //    JS:  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    @Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

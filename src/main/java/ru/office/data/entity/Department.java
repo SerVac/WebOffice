@@ -7,54 +7,57 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "department")
+@Table(name = Department.TABLE_NAME)
 public class Department implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    static final String TABLE_NAME = "department";
+    /*
+    id
+    office_id
+    sub_department_id
+    chief_id
+    worker_id
+    title
+    address
+     */
+    @Id
+    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
+    @GeneratedValue(generator = TABLE_NAME + "_generator")
+    private Long id;
 
-	/*
-	id
-	office_id
-	sub_department_id
-	chief_id
-	worker_id
-	title
-	address
-	 */
-	@Id
-	@SequenceGenerator(name="department_generator", sequenceName="department_sequence")
-	@GeneratedValue(generator = "department_generator")
-	private Long id;
+    @Column(nullable = false, unique = true)
+    private String title;
 
-	@Column(nullable = false)
-	private String title;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "office_id", nullable = false)
+    private Office office;
 
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="sub_department_id")
-	private Department subDepartment;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "main_department_id")
+    private Department mainDepartment;
 
-	@OneToMany(mappedBy="subDepartment")
-	private Set<Department> subDepartments = new HashSet<Department>();
+    @OneToMany(mappedBy = "mainDepartment")
+    private Set<Department> subDepartments = new HashSet<Department>();
 
-    @OneToMany(mappedBy="department")
-    private List<Worker> workers;
 
-	protected Department() {
-	}
+    protected Department() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    //	GET/SET
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
