@@ -4,3 +4,5 @@
 out
 gen
 target
+node_modules
+src/resources/static/**

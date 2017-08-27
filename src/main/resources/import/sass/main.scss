@@ -1,0 +1,12 @@
+@import "~primer-css/index.scss";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: pink;
+
+.test-sass  {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+
+
