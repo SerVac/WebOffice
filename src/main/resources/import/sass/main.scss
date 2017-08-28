@@ -1,11 +1,21 @@
-@import "~primer-css/index.scss";
+//@import "~primer-css/index.scss";
 
-$font-stack:    Helvetica, sans-serif;
-$primary-color: pink;
-
-.test-sass  {
-  font: 100% $font-stack;
-  color: $primary-color;
+.simple-tree{
+  .container {
+    padding: 0;
+    margin: 0;
+    li {
+      list-style-type: none;
+    }
+  }
+  /* indent for all tree children excepts root */
+  .node {
+    //background-image : url(img/i.gif);
+    background-position : top left;
+    background-repeat : repeat-y;
+    margin-left: 18px;
+    zoom: 1;
+  }
 }
 
 
