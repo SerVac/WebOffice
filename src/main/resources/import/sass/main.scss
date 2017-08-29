@@ -1,22 +1,24 @@
 //@import "~primer-css/index.scss";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
 
-.simple-tree{
+.simple-tree {
   .container {
     padding: 0;
     margin: 0;
     li {
-      list-style-type: none;
+      list-style-type: none
     }
-  }
-  /* indent for all tree children excepts root */
-  .node {
-    //background-image : url(img/i.gif);
-    background-position : top left;
-    background-repeat : repeat-y;
-    margin-left: 18px;
-    zoom: 1;
   }
 }
 
-
-
+  /* indent for all tree children excepts root */
+  .node {
+    @extend .fa;
+    @extend .fa-plus;
+    //background-image : url(img/i.gif);
+    background-position : top left;
+    background-repeat : repeat-y;
+    margin-left:
+    18px ;zoom: 1;
+  }

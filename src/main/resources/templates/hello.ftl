@@ -6,7 +6,7 @@
     <title>Hello ${name}!</title>
     <#--<link rel="stylesheet" type="text/css" href="/static/css/tree.css" />-->
     <#--<link rel="stylesheet" type="text/css" href="/css/tree.css" />-->
-    <link rel="stylesheet" type="text/css" href="/db_init_source/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 </head>
 <body>
@@ -16,23 +16,23 @@
 
 <ul class="Container">
 
-    <li class="Node IsRoot IsLast ExpandClosed">
-        <div class="Expand"></div>
-        <div class="Content">Root</div>
-        <ul class="Container">
-            <li class="Node ExpandClosed">
-                <div class="Expand"></div>
-                <div class="Content">Item 1</div>
-                <ul class="Container">
-                    <li class="Node ExpandLeaf IsLast">
-                        <div class="Expand"></div>
-                        <div class="Content">Item 1.2</div>
+    <li class="node isRoot isLast expandClosed">
+        <div class="expand"></div>
+        <div class="content">Root</div>
+        <ul class="container">
+            <li class="node expandClosed">
+                <div class="expand"></div>
+                <div class="content">Item 1</div>
+                <ul class="container">
+                    <li class="node expandLeaf isLast">
+                        <div class="expand"></div>
+                        <div class="content">Item 1.2</div>
                     </li>
                 </ul>
             </li>
-            <li class="Node ExpandLeaf IsLast">
-                <div class="Expand"></div>
-                <div class="Content">Item 2</div>
+            <li class="node expandLeaf isLast">
+                <div class="expand"></div>
+                <div class="content">Item 2</div>
             </li>
         </ul>
     </li>
