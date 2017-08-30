@@ -15,22 +15,16 @@ module.exports = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            //         use: 'file-loader?name=fonts/[name].[ext]'
-            // },
-            /*{
-             test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-             // test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-             use: 'url-loader?limit=100000'
-             },*/
-            /* {
-             test: /bootstrap\/dist\/js\/umd\//,
-             use: 'imports-loader?jQuery=jquery'
-             },*/
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+                use: [
+                    {
+                        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+                        options: {
+                            outputPath: './src/main/resources/static/'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
