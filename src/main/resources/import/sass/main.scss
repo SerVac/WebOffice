@@ -2,23 +2,81 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 
-.simple-tree {
-  .container {
-    padding: 0;
-    margin: 0;
-    li {
-      list-style-type: none
-    }
+ul.tree-container {
+  padding: 0;
+  margin: 0;
+
+  .content {
+    min-height: 18px;
+    margin-left:18px;
   }
-}
+
+  * html .content {
+    height: 18px;
+  }
+
+  li {
+    list-style-type: none
+  }
 
   /* indent for all tree children excepts root */
   .node {
     @extend .fa;
     @extend .fa-plus;
     //background-image : url(img/i.gif);
-    background-position : top left;
-    background-repeat : repeat-y;
-    margin-left:
-    18px ;zoom: 1;
+    background-position: top left;
+    background-repeat: repeat-y;
+    margin-left: 18px;
+    zoom: 1;
+
+
   }
+
+  .isRoot {
+    margin-left: 0;
+  }
+  .isLast {
+    background-image: url(/img/i_half.gif);
+    background-repeat : no-repeat;
+  }
+
+
+  .expandOpen {
+    .expand {
+      cursor: pointer;
+      @extend .fa;
+      @extend .fa-minus-square-o;
+      //background-image: url(img/expand_minus.gif);
+    }
+    .container{
+      display: block;
+    }
+  }
+
+  /* closed is higher priority than open */
+  .expandClosed {
+    .expand {
+      cursor: pointer;
+      @extend .fa-plus-square-o;
+      //background-image: url(img/expand_plus.gif);
+    }
+    .container{
+      display: none;
+    }
+  }
+
+  /* highest priority */
+  .expandLeaf{
+    .expand {
+      cursor: auto;
+      background-image: url(img/expand_leaf.gif);
+    }
+  }
+
+  .expand {
+    width: 18px;
+    height: 18px;
+    float: left;
+  }
+
+}
