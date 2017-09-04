@@ -1,14 +1,21 @@
 package ru.office.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.office.data.entity.Department;
+import ru.office.service.DepartmentRepository;
+
+import java.util.List;
 
 
 //@RestController
 @RequestMapping("/")
 @RepositoryRestController
 public class OfficeController {
+    @Autowired
+    DepartmentRepository departmentRepository;
 
    /* @RequestMapping(value = "/", method = RequestMethod.GET)
     public  @ResponseBody String home() {
@@ -16,9 +23,11 @@ public class OfficeController {
         return "Hello World!";
     }*/
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
+        List<Department> departmentList = (List<Department>) departmentRepository.findAll();
+
+        model.addAttribute("departmentList", departmentList);
         return "hello";
     }
 
