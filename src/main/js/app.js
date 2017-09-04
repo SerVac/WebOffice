@@ -6,6 +6,5 @@ import 'bootstrap';
 // import '../resources/import/sass/main.sass';
 import '../resources/import/sass/_custom.scss';
 
-
 const root = '/api';
 

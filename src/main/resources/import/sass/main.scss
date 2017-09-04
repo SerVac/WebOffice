@@ -2,91 +2,79 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 
-$assetPath : "/img";
+$assetPath : "img";
 
 
+  //background-image : url('#{$assetPath}/i.gif');
+  .simple-tree-container{
+    padding: 0 ;
+    margin: 0;
+  }
 
-.Container {
-  padding: 0;
-  margin: 0;
-}
+  .simple-tree-container li {
+    list-style-type: none;
+  }
 
-.Container li {
-  list-style-type: none;
-}
+  /* indent for all tree children excepts root */
+  .simple-tree-Node {
+    background-image : url('#{$assetPath}/i.gif');
+    background-position : top left;
+    background-repeat : repeat-y;
+    margin-left: 18px;
+    zoom: 1;
+  }
 
+  .simple-tree-IsRoot {
+    margin-left: 0;
+  }
 
+  /* left vertical line (grid) for all nodes */
+  .simple-tree-IsLast {
+    background-image: url('#{$assetPath}/i_half.gif');
+    background-repeat : no-repeat;
+  }
 
-/* indent for all tree children excepts root */
-.Node {
-  background-image : url('#{$assetPath}/i.gif');
-  background-position : top left;
-  background-repeat : repeat-y;
-  margin-left: 18px;
-  zoom: 1;
-}
+  .simple-tree-ExpandOpen .simple-tree-Expand {
+    background-image: url('#{$assetPath}/expand_minus.gif');
+  }
 
-.IsRoot {
-  margin-left: 0;
-}
+  /* closed is higher priority than open */
+  .simple-tree-ExpandClosed .simple-tree-Expand {
+    background-image: url('#{$assetPath}/expand_plus.gif');
+  }
 
+  /* highest priority */
+  .simple-tree-ExpandLeaf .simple-tree-Expand {
+    background-image: url('#{$assetPath}/expand_leaf.gif');
+  }
 
-/* left vertical line (grid) for all nodes */
-.IsLast {
-  background-image: url('#{$assetPath}/i_half.gif');
-  background-repeat : no-repeat;
-}
+  .simple-tree-Content {
+    min-height: 18px;
+    margin-left:18px;
+  }
 
-.ExpandOpen .Expand {
-  background-image: url('#{$assetPath}/expand_minus.gif');
-}
+  * html .simple-tree-Content {
+    height: 18px;
+  }
 
-/* closed is higher priority than open */
-.ExpandClosed .Expand {
-  background-image: url('#{$assetPath}/expand_plus.gif');
-}
+  .simple-tree-Expand {
+    width: 18px;
+    height: 18px;
+    float: left;
+  }
 
-/* highest priority */
-.ExpandLeaf .Expand {
-  background-image: url('#{$assetPath}/expand_leaf.gif');
-}
+  .simple-tree-ExpandOpen .simple-tree-container  {
+    display: block;
+  }
 
-.Content {
-  min-height: 18px;
-  margin-left:18px;
-}
+  .simple-tree-ExpandClosed  .simple-tree-container{
+    display: none;
+  }
 
-* html  .Content {
-  height: 18px;
-}
+  .simple-tree-ExpandOpen .simple-tree-Expand, .simple-tree-ExpandClosed .simple-tree-Expand {
+    cursor: pointer;
+  }
+  .simple-tree-ExpandLeaf .simple-tree-Expand {
+    cursor: auto;
+  }
 
-.Expand {
-  width: 18px;
-  height: 18px;
-  float: left;
-}
-
-
-.ExpandLoading   {
-  width: 18px;
-  height: 18px;
-  float: left;
-  background-image: url('#{$assetPath}/expand_loading.gif');
-}
-
-
-
-.ExpandOpen .Container {
-  display: block;
-}
-
-.ExpandClosed .Container {
-  display: none;
-}
-
-.ExpandOpen .Expand, .ExpandClosed .Expand {
-  cursor: pointer;
-}
-.ExpandLeaf .Expand {
-  cursor: auto;
-}

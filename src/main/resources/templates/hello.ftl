@@ -39,50 +39,31 @@
 
 <div class="container-fluid">
 
-    <div onclick="tree_toggle(arguments[0])" class="step2">
-        <div>Root</div>
-        <ul class="Container">
-            <li class="Node IsRoot ExpandClosed">
-                <div class="Expand"></div>
-                <div class="Content">Item 1</div>
-                <ul class="Container">
-                    <li class="Node ExpandClosed">
-                        <div class="Expand"></div>
-                        <div class="Content">Item 1.1</div>
-                        <ul class="Container">
-                            <li class="Node ExpandLeaf IsLast">
-                                <div class="Expand"></div>
-                                <div class="Content">Item 1.1.2</div>
+    <div onclick="tree_toggle(arguments[0])">
+        <div>Tree</div>
+        <ul class="simple-tree-Container">
+            <li class="simple-tree-Node simple-tree-IsRoot simple-tree-IsLast simple-tree-ExpandClosed">
+                <div class="simple-tree-Expand"></div>
+                <div class="simple-tree-Content">Root</div>
+                <ul class="simple-tree-Container">
+                    <li class="simple-tree-Node simple-tree-ExpandClosed">
+                        <div class="simple-tree-Expand"></div>
+                        <div class="simple-tree-Content">Item 1</div>
+                        <ul class="simple-tree-Container">
+                            <li class="simple-tree-Node simple-tree-ExpandLeaf simple-tree-IsLast">
+                                <div class="simple-tree-Expand"></div>
+                                <div class="simple-tree-Content">Item 1.2</div>
                             </li>
                         </ul>
                     </li>
-                    <li class="Node ExpandLeaf IsLast">
-                        <div class="Expand"></div>
-                        <div class="Content">Item 1.2</div>
-                    </li>
-                </ul>
-            </li>
-            <li class="Node IsRoot ExpandClosed">
-                <div class="Expand"></div>
-                <div class="Content">Item 2<br>title long yeah</div>
-                <ul class="Container">
-                    <li class="Node ExpandLeaf IsLast">
-                        <div class="Expand"></div>
-                        <div class="Content">Item 2.1</div>
-                    </li>
-                </ul>
-            </li>
-            <li class="Node ExpandOpen IsRoot IsLast">
-                <div class="Expand"></div>
-                <div class="Content">Item 3</div>
-                <ul class="Container">
-                    <li class="Node ExpandLeaf IsLast">
-                        <div class="Expand"></div>
-                        <div class="Content">Item 3.1</div>
+                    <li class="simple-tree-Node simple-tree-ExpandLeaf simple-tree-IsLast">
+                        <div class="simple-tree-Expand"></div>
+                        <div class="simple-tree-Content">Item 2</div>
                     </li>
                 </ul>
             </li>
         </ul>
+
     </div>
 
 </div>

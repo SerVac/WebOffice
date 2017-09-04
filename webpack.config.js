@@ -3,7 +3,9 @@ var path = require('path'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var node_dir = __dirname + '/node_modules';
-
+var img_dir = __dirname+'/src/main/resources/import/img';
+var static_dir = './src/main/resources/static/';
+// console.log("! PATH = "+__dirname);
 
 module.exports = {
     entry: './src/main/js/app.js',
@@ -11,7 +13,7 @@ module.exports = {
     cache: true,
     output: {
         path: __dirname,
-        filename: './src/main/resources/static/bundle.js'
+        filename: static_dir+'bundle.js'
     },
     module: {
         rules: [
@@ -19,9 +21,9 @@ module.exports = {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: [
                     {
-                        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+                        loader: 'url-loader?mimetype=application/font-woff',
                         options: {
-                            outputPath: './src/main/resources/static/'
+                            outputPath: static_dir
                         }
                     }
                 ]
@@ -32,18 +34,21 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            outputPath: './src/main/resources/static/'
+                            outputPath: static_dir
                         }
                     }
                 ]
             },
             {
                 test: /\.(s(ass|css))$/,
+                // loader: ExtractTextPlugin.extract('css-loader!sass-loader')
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     // use: ['css-loader', 'sass-loader']
                     use: [
-                        {loader: 'css-loader'},
+                        {
+                            loader: 'css-loader'
+                        },
                         {
                             loader: 'postcss-loader',
                             options: {
@@ -58,9 +63,9 @@ module.exports = {
                         {
                             loader: "sass-loader",
                             options: {
-                                includePaths: [node_dir]
+                                includePaths: [node_dir, img_dir]
                             }
-                        },
+                        }
                     ]
                 })
             }
@@ -70,13 +75,25 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ['css-loader']
                 })
-            }
+            },
+            {
+                test: /\.(?:gif|png|jpg|svg)$/,
+                use: [
+                    {
+                        // loader: 'url-loader?name=./img/[hash].[ext]',
+                        loader: 'url-loader',
+                        options: {
+                            outputPath: static_dir+'/img/'
+                        }
+                    }
+                ]
+            },
         ]
 
     },
     plugins: [
-        new ExtractTextPlugin({
-            filename: './src/main/resources/static/css/style.css'
+        new ExtractTextPlugin('./src/main/resources/static/css/style.css', {
+                allChunks: true
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
