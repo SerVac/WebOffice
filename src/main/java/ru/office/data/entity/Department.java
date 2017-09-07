@@ -1,5 +1,9 @@
 package ru.office.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -8,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = Department.TABLE_NAME)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Department implements Serializable {
 
     private static final long serialVersionUID = 1L;

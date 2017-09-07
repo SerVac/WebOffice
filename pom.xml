@@ -47,6 +47,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
+          <!--  <exclusions>
+                <exclusion>
+                    <artifactId>logback-classic</artifactId>
+                    <groupId>ch.qos.logback</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>-->
         </dependency>
 
         <dependency>
@@ -84,42 +94,30 @@
                     <mainClass>ru.office.OfficeAppMain</mainClass>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.2</version>
-                <configuration>
-                    <installDirectory>target</installDirectory>
-                </configuration>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
                 <executions>
-                    &lt;!&ndash;<execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v4.4.5</nodeVersion>
-                            <npmVersion>3.9.2</npmVersion>
-                        </configuration>
-                    </execution>
-                    &ndash;&gt;
                     <execution>
-                        <id>npm install</id>
+                        <id>WEBPACK BUILD</id>
+                        <phase>compile</phase>
+
                         <goals>
-                            <goal>npm</goal>
+                            <goal>exec</goal>
                         </goals>
+
                         <configuration>
-                            <arguments>install</arguments>
+                            <executable>webpack</executable>
+                          <!--  <arguments>
+                                <argument>build</argument>
+                            </arguments>-->
+                            <workingDirectory>${basedir}</workingDirectory>
                         </configuration>
-                    </execution>
-                    <execution>
-                        <id>webpack build</id>
-                        <goals>
-                            <goal>webpack</goal>
-                        </goals>
+
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 

@@ -1,10 +1,11 @@
 'use strict';
 
-// import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-// @import "~bootstrap/dist/css/bootstrap";
+import Vue from 'vue';
+// window.Vue = Vue;
+import './vue-tree';
 import 'bootstrap';
-// import '../resources/import/sass/main.sass';
 import '../resources/import/sass/_custom.scss';
+
 
 const root = '/api';
 

@@ -9,62 +9,67 @@
 <body>
 
 <script type="text/javascript">
-
-    function tree_toggle(event) {
-        event = event || window.event;
-        var clickedElem = event.target || event.srcElement;
-
-        if (!hasClass(clickedElem, 'Expand')) {
-            return; // wrong click
-        }
-
-        var node = clickedElem.parentNode;
-        if (hasClass(node, 'ExpandLeaf')) {
-            return; // click on list
-        }
-
-        // определить новый класс для узла
-        var newClass = hasClass(node, 'ExpandOpen') ? 'ExpandClosed' : 'ExpandOpen';
-        // заменить текущий класс на newClass
-        // регексп находит отдельно стоящий open|close и меняет на newClass
-        var re = /(^|\s)(ExpandOpen|ExpandClosed)(\s|$)/;
-        node.className = node.className.replace(re, '$1' + newClass + '$3');
+    var treeData = {
+        name: 'My Tree',
+        children: [
+            {name: 'hello'},
+            {name: 'wat'},
+            {
+                name: 'child folder',
+                children: [
+                    {
+                        name: 'child folder',
+                        children: [
+                            {name: 'hello'},
+                            {name: 'wat'}
+                        ]
+                    },
+                    {name: 'hello'},
+                    {name: 'wat'},
+                    {
+                        name: 'child folder',
+                        children: [
+                            {name: 'hello'},
+                            {name: 'wat'}
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 
-
-    function hasClass(elem, className) {
-        return new RegExp("(^|\\s)" + className + "(\\s|$)").test(elem.className);
-    }
 </script>
 
 <div class="container-fluid">
 
-    <div onclick="tree_toggle(arguments[0])">
-        <div>Tree</div>
-        <ul class="simple-tree-Container">
-            <li class="simple-tree-Node simple-tree-IsRoot simple-tree-IsLast simple-tree-ExpandClosed">
-                <div class="simple-tree-Expand"></div>
-                <div class="simple-tree-Content">Root</div>
-                <ul class="simple-tree-Container">
-                    <li class="simple-tree-Node simple-tree-ExpandClosed">
-                        <div class="simple-tree-Expand"></div>
-                        <div class="simple-tree-Content">Item 1</div>
-                        <ul class="simple-tree-Container">
-                            <li class="simple-tree-Node simple-tree-ExpandLeaf simple-tree-IsLast">
-                                <div class="simple-tree-Expand"></div>
-                                <div class="simple-tree-Content">Item 1.2</div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="simple-tree-Node simple-tree-ExpandLeaf simple-tree-IsLast">
-                        <div class="simple-tree-Expand"></div>
-                        <div class="simple-tree-Content">Item 2</div>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <!-- item template -->
+    <script type="text/x-template" id="item-template">
+        <li>
+            <div
+                    :class="{bold: isFolder}"
+                    @click="toggle"
+            >
+                {{model.name}}
+                <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+            </div>
+            <ul v-show="open" v-if="isFolder">
+                <item
+                        class="item"
+                        v-for="model in model.children"
+                        :model="model">
+                </item>
+                <li class="add" @click="addChild">+</li>
+            </ul>
+        </li>
+    </script>
 
-    </div>
+    <!--  root element -->
+    <ul id="companies_tree">
+        <item
+                class="item"
+                :model="treeData">
+        </item>
+    </ul>
 
 </div>
 
@@ -73,7 +78,7 @@
     <#if !department.mainDepartment??>
         <#if department.subDepartments??>
             <#list department.subDepartments as department>
-                RecursiveDepartmentsView(department)
+            RecursiveDepartmentsView(department)
             </#list>
         <#else>
             <#return '<div>'+department.id+' / '+department.title+'</div>'>
