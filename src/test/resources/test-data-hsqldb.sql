@@ -1,5 +1,3 @@
-INSERT INTO company(title) VALUES('company3');
-/*
 
 INSERT INTO company(title) VALUES('company1');
 INSERT INTO company(title) VALUES('company2');
@@ -72,4 +70,4 @@ VALUES('w1_31', 'wm1_31', 'wl1_31', 'w1_31@email.com', DATE '1986-01-01', 9);
 -- department 3_2 workers
 INSERT INTO worker(name, middle_name, last_name, email, birth_date, department_id)
 VALUES('w1_32', 'wm1_32', 'wl1_32', 'w1_32@email.com', DATE '1986-01-01', 10);
-*/
+

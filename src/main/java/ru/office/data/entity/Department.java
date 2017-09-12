@@ -3,6 +3,7 @@ package ru.office.data.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,25 +21,28 @@ public class Department implements Serializable {
     title
     address
      */
+//    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
+//    @GeneratedValue(generator = TABLE_NAME + "_generator")
     @Id
-    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
-    @GeneratedValue(generator = TABLE_NAME + "_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "office_id", nullable = false)
     private Office office;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "main_department_id")
     private Department mainDepartment;
 
-    @OneToMany(mappedBy = "mainDepartment")
+    @OneToMany(mappedBy = "mainDepartment", cascade = CascadeType.ALL)
     private Set<Department> subDepartments = new HashSet<Department>();
 
+    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL)
+    private Set<Worker> workers;
 
     protected Department() {
     }
@@ -60,4 +64,7 @@ public class Department implements Serializable {
         this.title = title;
     }
 
+    public Set<Department> getSubDepartments() {
+        return subDepartments;
+    }
 }

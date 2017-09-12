@@ -28,9 +28,11 @@ public class Worker implements Serializable {
     phone (uniq)
     email (uniq)
     */
+
+//    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
+//    @GeneratedValue(generator = TABLE_NAME + "_generator")
     @Id
-    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
-    @GeneratedValue(generator = TABLE_NAME + "_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)

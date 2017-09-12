@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = Company.TABLE_NAME)
@@ -17,18 +18,19 @@ public class Company implements Serializable {
     title (unique)
     office_id
      */
+
+//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
+//    @GeneratedValue(generator = TABLE_NAME+"_generator")
     @Id
-//    @GeneratedValue(strategy=GenerationType.AUTO)
-    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
-    @GeneratedValue(generator = TABLE_NAME+"_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String title;
 
-    @OneToMany(mappedBy = TABLE_NAME)
+    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL)
     @NotNull
-    private List<Office> offices;
+    private Set<Office> offices;
 
     protected Company() {
     }

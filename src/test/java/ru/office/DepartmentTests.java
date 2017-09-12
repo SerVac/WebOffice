@@ -90,7 +90,7 @@ public class DepartmentTests {
     }*/
 
 
-    @Test
+//    @Test
     public void shouldReturnRepositoryIndex() throws Exception {
         mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(
                 jsonPath("$._links." + DEPARTMENT_LOCATION).exists());
@@ -104,7 +104,7 @@ public class DepartmentTests {
                 .andExpect(status().isNotFound());
     }*/
 
-//    @Test
+    @Test
     public void shouldQueryEntity() throws Exception {
         String TITLE = "c1_office1_dep1";
         mockMvc.perform(get(REST_DEPARTMENT_LOCATION).content(

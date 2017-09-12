@@ -3,6 +3,7 @@ package ru.office.data.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = Office.TABLE_NAME)
@@ -18,20 +19,21 @@ public class Office implements Serializable {
     department_id
     company_id
      */
+//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
+//    @GeneratedValue(generator = TABLE_NAME+"_generator")
     @Id
-    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
-    @GeneratedValue(generator = TABLE_NAME+"_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(mappedBy = TABLE_NAME)
-    private List<Department> departments;
+    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL)
+    private Set<Department> departments;
 
     protected Office() {
     }
