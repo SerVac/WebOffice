@@ -1,6 +1,5 @@
 package ru.office;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -37,9 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@SpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-@DatabaseSetup(DepartmentTests.DATASET)
+@PropertySource("classpath:test-application.properties")
 public class DepartmentTests {
-    static final String DATASET = "classpath:test-data-hsqldb.sql";
   /*  private MediaType contentType = new MediaType(
             MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
@@ -105,7 +104,7 @@ public class DepartmentTests {
                 .andExpect(status().isNotFound());
     }*/
 
-    @Test
+//    @Test
     public void shouldQueryEntity() throws Exception {
         String TITLE = "c1_office1_dep1";
         mockMvc.perform(get(REST_DEPARTMENT_LOCATION).content(

@@ -3,7 +3,6 @@ package ru.office.data.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,7 +10,7 @@ import java.util.Set;
 public class Department implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    static final String TABLE_NAME = "department";
+    public static final String TABLE_NAME = "department";
     /*
     id
     office_id
@@ -60,4 +59,5 @@ public class Department implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }

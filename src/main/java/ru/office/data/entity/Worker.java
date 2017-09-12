@@ -16,7 +16,7 @@ import java.util.Date;
 public class Worker implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    static final String TABLE_NAME = "worker";
+    public static final String TABLE_NAME = "worker";
     /*
     id
     department_id

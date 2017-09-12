@@ -9,7 +9,7 @@ import java.util.List;
 public class Office implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    static final String TABLE_NAME = "office";
+    public static final String TABLE_NAME = "office";
 
     /*
     id

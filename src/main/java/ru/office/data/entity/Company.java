@@ -10,7 +10,7 @@ import java.util.List;
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    static final String TABLE_NAME = "company";
+    public static final String TABLE_NAME = "company";
 
     /*
     id
