@@ -1,4 +1,4 @@
-package ru.office.service;
+package ru.office.dao;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "department", path = "department")
 public interface DepartmentRepository extends PagingAndSortingRepository<Department, Long> {
-
+//	int t = 0;
 	List<Department> findByTitle(@Param("title") String name);
 
 }

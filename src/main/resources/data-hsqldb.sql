@@ -1,31 +1,30 @@
 INSERT INTO company(title) VALUES('company1');
 INSERT INTO company(title) VALUES('company2');
 
-INSERT INTO office(title, company_id) VALUES('c1_office1', 1);
-INSERT INTO office(title, company_id) VALUES('c1_office2', 1);
-INSERT INTO office(title, company_id) VALUES('c1_office3', 1);
+INSERT INTO office(title, company_id) VALUES('c1_office1', 1); -- 1
+INSERT INTO office(title, company_id) VALUES('c1_office2', 1); -- 2
+INSERT INTO office(title, company_id) VALUES('c1_office3', 1); -- 3
+INSERT INTO office(title, company_id) VALUES('c1_office4', 2); -- 4
+INSERT INTO office(title, company_id) VALUES('c1_office5', 2); -- 5
+INSERT INTO office(title, company_id) VALUES('c1_office6', 2); -- 6
+INSERT INTO office(title, company_id) VALUES('c1_office7', 2); -- 7
 
-INSERT INTO office(title, company_id) VALUES('c2_office1', 2);
-INSERT INTO office(title, company_id) VALUES('c2_office2', 2);
-INSERT INTO office(title, company_id) VALUES('c2_office3', 2);
-INSERT INTO office(title, company_id) VALUES('c2_office3', 2);
-
--- department 1
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1', null); -- 1
--- department 1  - sub departments 1
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1_1', 1); -- 2
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1_2', 1); -- 3
--- department 1  - sub departments 1 - sub departments 2
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1_2_1', 3); -- 4
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1_2_2', 3); -- 5
--- department 1  - sub departments 1
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep1_3', 1); -- 6
--- department 1  - sub departments 1
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep2', null); -- 7
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep3', null); -- 8
--- department 1  - sub departments 1
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep3_1', 8); -- 9
-INSERT INTO department(title, main_department_id) VALUES('c1_office1_dep3_2', 8); -- 10
+-- department 1 (office 1)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1', 1, null); -- 1
+-- department 1  - sub departments 1  (office 2)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_1', 2, 1); -- 2
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_2', 2, 1); -- 3
+-- department 1  - sub departments 1 - sub departments 2 (office 3)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_2_1', 3, 3); -- 4
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_2_2', 3, 3); -- 5
+-- department 1  - sub departments 1 (office 4)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_3', 4, 1); -- 6
+-- department 1  - sub departments 1 (office 5)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep2',  5, null); -- 7
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep3',  6, null); -- 8
+-- department 1  - sub departments 1 (office 6)
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep3_1', 7, 8); -- 9
+INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep3_2', 7, 8); -- 10
 
 
 -- department 1 workers
