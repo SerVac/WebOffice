@@ -9,6 +9,11 @@
 <body>
 
 <script type="text/javascript">
+    var treeDate2 = {
+        name: 'Companies',
+        children: []
+    };
+
     var treeData = {
         name: 'My Tree',
         children: [
@@ -89,10 +94,11 @@
 
 
 <div class="department_view">
-<#list departmentList as department>
-    <#--${RecursiveDepartmentsView(department)}-->
-</#list>
-
+<#if departmentList??>
+    <#list departmentList as department>
+        ${RecursiveDepartmentsView(department)}
+    </#list>
+</#if>
 </div>
 
 

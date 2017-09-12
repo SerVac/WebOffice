@@ -1,3 +1,6 @@
+import Vue from 'vue';
+// window.Vue = Vue;
+
 // demo data
 /*var data = {
     name: 'My Tree',
@@ -64,7 +67,8 @@ Vue.component('item', {
             })
         }
     }
-})
+});
+
 
 // boot up the demo
 var demo = new Vue({
