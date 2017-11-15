@@ -1,14 +1,16 @@
 package ru.office.data.entity;
 
+import ru.office.dao.DefaultValues;
+
 import javax.persistence.*;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = Department.TABLE_NAME)
-public class Department implements Serializable {
+public class Department extends AbstractEntity{
 
     private static final long serialVersionUID = 1L;
     public static final String TABLE_NAME = "department";
@@ -21,13 +23,8 @@ public class Department implements Serializable {
     title
     address
      */
-//    @SequenceGenerator(name = TABLE_NAME + "_generator", sequenceName = TABLE_NAME + "_sequence")
-//    @GeneratedValue(generator = TABLE_NAME + "_generator")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
 
     @ManyToOne
@@ -38,24 +35,16 @@ public class Department implements Serializable {
     @JoinColumn(name = "main_department_id")
     private Department mainDepartment;
 
-    @OneToMany(mappedBy = "mainDepartment", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mainDepartment", cascade = CascadeType.ALL)
     private Set<Department> subDepartments = new HashSet<Department>();
 
-    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     private Set<Worker> workers;
 
-    protected Department() {
+    public Department() {
     }
 
     //	GET/SET
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -64,7 +53,35 @@ public class Department implements Serializable {
         this.title = title;
     }
 
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    public Department getMainDepartment() {
+        return mainDepartment;
+    }
+
+    public void setMainDepartment(Department mainDepartment) {
+        this.mainDepartment = mainDepartment;
+    }
+
     public Set<Department> getSubDepartments() {
         return subDepartments;
+    }
+
+    public void setSubDepartments(Set<Department> subDepartments) {
+        this.subDepartments = subDepartments;
+    }
+
+    public Set<Worker> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(Set<Worker> workers) {
+        this.workers = workers;
     }
 }

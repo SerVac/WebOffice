@@ -1,45 +1,29 @@
 package ru.office.service;
 
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import ru.office.dao.DepartmentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.CrudRepository;
+import ru.office.dao.repository.DepartmentRepository;
 import ru.office.data.entity.Department;
-import ru.office.dto.DepartmentDTO;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Resource;
 
-public class DepartmentService {
-    @Autowired
-    DepartmentRepository departmentRepository;
+@org.springframework.stereotype.Service
+public class DepartmentService extends Service<Department> {
 
-    @Autowired
-    private ModelMapper modelMapper;// = new ModelMapper();
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentService.class);
 
-    public List<DepartmentDTO> findAll() {
-        List<Department> departments = (List<Department>) departmentRepository.findAll();
-        List<DepartmentDTO> departmentDTOS = new ArrayList<DepartmentDTO>();
-        for(Department department:departments){
-            departmentDTOS.add(convertToDto(department));
-        }
-        return departmentDTOS;
+    @Resource
+    DepartmentRepository repository;
+
+    @Override
+    protected CrudRepository<Department, Long> getRepository() {
+        return repository;
     }
 
-    private DepartmentDTO convertToDto(Department department) {
-        DepartmentDTO departmentDTO = modelMapper.map(department, DepartmentDTO.class);
-        departmentDTO.setSubDepartments(department.getSubDepartments());
-        return departmentDTO;
+    public DepartmentService(Class<Department> type) {
+        super(type);
     }
 
-
-    /*PropertyMap<Department, DepartmentDTO> departmentMap =
-            new PropertyMap<Department, DepartmentDTO>() {
-                protected void configure() {
-                    map().setSubDepartments(source.getSubDepartments());
-                }
-            };
-        modelMapper.addMappings(departmentMap);*/
 }

@@ -11,7 +11,7 @@ INSERT INTO office(title, company_id) VALUES('c1_office6', 2); -- 6
 INSERT INTO office(title, company_id) VALUES('c1_office7', 2); -- 7
 
 -- department 1 (office 1)
-INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1', 1, null); -- 1
+INSERT INTO department(title, office_id, main_department_id) VALUES('test_c1_office1_dep1', 1, null); -- 1
 -- department 1  - sub departments 1  (office 2)
 INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_1', 2, 1); -- 2
 INSERT INTO department(title, office_id, main_department_id) VALUES('c1_office1_dep1_2', 2, 1); -- 3

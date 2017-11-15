@@ -1,14 +1,14 @@
 package ru.office.data.entity;
 
+import ru.office.dao.DefaultValues;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = Company.TABLE_NAME)
-public class Company implements Serializable {
+public class Company extends AbstractEntity{
 
     private static final long serialVersionUID = 1L;
     public static final String TABLE_NAME = "company";
@@ -19,31 +19,17 @@ public class Company implements Serializable {
     office_id
      */
 
-//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
-//    @GeneratedValue(generator = TABLE_NAME+"_generator")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
 
-    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL)
-    @NotNull
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private Set<Office> offices;
 
-    protected Company() {
+    public Company() {
     }
 
     //	GET/SET
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -52,4 +38,15 @@ public class Company implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Set<Office> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(Set<Office> offices) {
+        this.offices = offices;
+    }
+
+
+
 }
