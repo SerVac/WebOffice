@@ -6,15 +6,17 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import ru.office.data.entity.Department;
+import ru.office.service.CrudService;
 import ru.office.service.DepartmentService;
-import ru.office.service.Service;
 
 import javax.transaction.Transactional;
 import java.nio.charset.Charset;
@@ -24,8 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc()
 @Transactional
+//@ContextConfiguration(classes = {DepartmentService.class, Department.class, CrudService.class})
 public class DepartmentTests {
 
 
@@ -35,8 +38,8 @@ public class DepartmentTests {
     @Autowired
     private WebApplicationContext context;
 
-    @Autowired
-    private Service departmentService;
+    @MockBean
+    private DepartmentService departmentService;
 
     private final String DEPARTMENT_LOCATION = Department.TABLE_NAME;
     private final String REST_DEPARTMENT_LOCATION = "/" + DEPARTMENT_LOCATION;
@@ -62,7 +65,7 @@ private MediaType contentType = new MediaType("application", "hal+json", Charset
     @Test
     public void shouldQueryEntity() throws Exception {
         String TITLE = "test_c1_office1_dep1";
-        Department department = ((DepartmentService)departmentService).get((long)1);
+        Department department = departmentService.get((long)1);
 
        /* mockMvc.perform(get(REST_DEPARTMENT_LOCATION+"/1"))
 //                .andExpect(content().contentType(contentType))

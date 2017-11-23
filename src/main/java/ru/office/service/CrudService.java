@@ -7,18 +7,17 @@ import ru.office.data.entity.AbstractEntity;
 import ru.office.service.exception.NotFoundException;
 
 import javax.persistence.MappedSuperclass;
-import java.util.Collection;
 import java.util.List;
 
 @MappedSuperclass
-public abstract class Service<T extends AbstractEntity> {
-    private static final Logger logger = LoggerFactory.getLogger(Service.class);
+public abstract class CrudService<T extends AbstractEntity> {
+    private static final Logger logger = LoggerFactory.getLogger(CrudService.class);
 
     protected final Class<T> type;
 
     protected abstract CrudRepository<T, Long> getRepository();
 
-    public Service(Class<T> type) {
+    public CrudService(Class<T> type) {
         this.type = type;
     }
 

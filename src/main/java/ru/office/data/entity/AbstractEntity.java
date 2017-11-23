@@ -1,11 +1,11 @@
 package ru.office.data.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
@@ -17,21 +17,40 @@ public abstract class AbstractEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
-//    @Version
-//    @NotNull
-//    private int version = 0;
+    @Version
+    private long version;
 
-    public boolean isNew() {
-        return id == null;
+    @Column(name = "creation_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
+
+    @Column(name = "modification_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificationTime;
+
+    @PrePersist
+    public void prePersist() {
+        Date now = new Date();
+        creationTime = new Date();
+        modificationTime = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modificationTime = new Date();
     }
 
     public Long getId() {
         return id;
     }
 
-   /* public int getVersion() {
-        return version;
-    }*/
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
 
     @Override
     public int hashCode() {
@@ -58,13 +77,5 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
-  /*
-  public int getVersion() {
-        return version;
-    }
 
-    public void setVersion(int version) {
-        this.version = version;
-    }
-    */
 }
