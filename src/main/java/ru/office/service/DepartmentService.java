@@ -23,8 +23,7 @@ public class DepartmentService extends CrudService<Department> {
         return repository;
     }
 
-    public DepartmentService(Class<Department> type) {
-        super(type);
+    public DepartmentService() {
+        super(Department.class);
     }
-
 }

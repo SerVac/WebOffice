@@ -1,10 +1,8 @@
 package ru.office.data.entity;
 
-import ru.office.dao.DefaultValues;
+import ru.office.config.DefaultValues;
 
 import javax.persistence.*;
-import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 

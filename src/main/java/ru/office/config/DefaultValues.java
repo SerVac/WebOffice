@@ -1,4 +1,4 @@
-package ru.office.dao;
+package ru.office.config;
 
 
 public class DefaultValues {

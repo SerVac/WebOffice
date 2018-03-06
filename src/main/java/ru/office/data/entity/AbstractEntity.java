@@ -10,7 +10,6 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
-
 //    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
 //    @GeneratedValue(generator = TABLE_NAME+"_generator")
     @Id
@@ -77,5 +76,27 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
+    public long getVersion() {
+        return version;
+    }
 
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 }

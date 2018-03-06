@@ -1,6 +1,6 @@
 package ru.office.data.entity;
 
-import ru.office.dao.DefaultValues;
+import ru.office.config.DefaultValues;
 
 import javax.persistence.*;
 import java.util.Set;

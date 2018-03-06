@@ -1,9 +1,8 @@
 package ru.office.data.entity;
 
-import ru.office.dao.DefaultValues;
+import ru.office.config.DefaultValues;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -17,6 +16,7 @@ import java.util.Date;
 public class Worker extends AbstractEntity{
 
     private static final long serialVersionUID = 1L;
+
     public static final String TABLE_NAME = "worker";
 
 
