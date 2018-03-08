@@ -1,14 +1,16 @@
 package ru.office.data.entity;
 
-import org.hibernate.annotations.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
 //    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
 //    @GeneratedValue(generator = TABLE_NAME+"_generator")
@@ -98,5 +100,22 @@ public abstract class AbstractEntity implements Serializable {
 
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
+    }
+
+//    loggs
+    public void info(String msg){
+        logger.info(msg);
+    }
+
+    public void warn(String msg){
+        logger.warn(msg);
+    }
+
+    public void error(String msg){
+        logger.error(msg);
+    }
+
+    public void debug(String msg){
+        logger.debug(msg);
     }
 }

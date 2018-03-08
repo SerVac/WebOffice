@@ -1,6 +1,5 @@
 package ru.office.service;
 
-import org.aspectj.weaver.ast.Not;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
@@ -10,22 +9,23 @@ import ru.office.service.utils.MsgFormatter;
 
 import javax.persistence.MappedSuperclass;
 import javax.transaction.Transactional;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
-import java.util.Objects;
 
 @MappedSuperclass
 public abstract class CrudService<T extends AbstractEntity> {
-    private static final Logger logger = LoggerFactory.getLogger(CrudService.class);
 
     private static final String NOT_EXIST_MSG_WITH_ID = "Entity with Id = %s is NOT exist!";
 
-    protected final Class<T> type;
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
+    protected final Class<T> type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+//    public CrudService(Class<T> type) {
+//        this.type = type;
+//    }
 
     protected abstract CrudRepository<T, Long> getRepository();
-
-    public CrudService(Class<T> type) {
-        this.type = type;
-    }
 
     @Transactional
     public T save(T entity) {
@@ -68,5 +68,22 @@ public abstract class CrudService<T extends AbstractEntity> {
         NotFoundException nfe = new NotFoundException(id);
         logger.warn(nfe.getMsg());
         throw nfe;
+    }
+
+    //    loggs
+    public void info(String msg){
+        logger.info(msg);
+    }
+
+    public void warn(String msg){
+        logger.warn(msg);
+    }
+
+    public void error(String msg){
+        logger.error(msg);
+    }
+
+    public void debug(String msg){
+        logger.debug(msg);
     }
 }
