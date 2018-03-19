@@ -13,7 +13,7 @@ import java.util.Date;
                         columnNames = {"name", "middle_name", "last_name"})
         }
 )
-public class Worker extends AbstractEntity{
+public class Worker extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,31 +31,18 @@ public class Worker extends AbstractEntity{
     phone (uniq)
     email (uniq)
     */
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(name = "middle_name", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     private String middleName;
-
-    @Column(name = "last_name", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     private String lastName;
-
-    @Column(name = "birth_date", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     private Date birthDate;
-
-    @Column(name = "email", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_EMAIL)
     private String email;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
     public Worker() {
     }
 
     //	GET/SET
-
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -64,6 +51,7 @@ public class Worker extends AbstractEntity{
         this.name = name;
     }
 
+    @Column(name = "middle_name", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     public String getMiddleName() {
         return middleName;
     }
@@ -72,6 +60,7 @@ public class Worker extends AbstractEntity{
         this.middleName = middleName;
     }
 
+    @Column(name = "last_name", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     public String getLastName() {
         return lastName;
     }
@@ -80,6 +69,7 @@ public class Worker extends AbstractEntity{
         this.lastName = lastName;
     }
 
+    @Column(name = "birth_date", nullable = false, length = DefaultValues.MAX_LENGTH_NAME)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -88,6 +78,7 @@ public class Worker extends AbstractEntity{
         this.birthDate = birthDate;
     }
 
+    @Column(name = "email", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_EMAIL)
     public String getEmail() {
         return email;
     }
@@ -96,6 +87,8 @@ public class Worker extends AbstractEntity{
         this.email = email;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
     public Department getDepartment() {
         return department;
     }

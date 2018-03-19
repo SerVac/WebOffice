@@ -19,13 +19,17 @@ public abstract class CrudService<T extends AbstractEntity> {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected final Class<T> type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    protected final Class<T> type;
 
 //    public CrudService(Class<T> type) {
 //        this.type = type;
 //    }
 
     protected abstract CrudRepository<T, Long> getRepository();
+
+    public CrudService() {
+        type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
 
     @Transactional
     public T save(T entity) {

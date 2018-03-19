@@ -10,23 +10,18 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
+    @Transient
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
 //    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
 //    @GeneratedValue(generator = TABLE_NAME+"_generator")
-    @Id
-    @GeneratedValue
-    private Long id;
 
+    private Long id;
     @Version
     private long version;
-
-    @Column(name = "creation_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "modification_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modification_time")
     private Date modificationTime;
 
     @PrePersist
@@ -41,6 +36,7 @@ public abstract class AbstractEntity implements Serializable {
         modificationTime = new Date();
     }
 
+    @Id @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -49,11 +45,13 @@ public abstract class AbstractEntity implements Serializable {
         this.id = id;
     }
 
+    @Transient
     public boolean isNew() {
         return id == null;
     }
 
     @Override
+    @Transient
     public int hashCode() {
         if (isNew()) {
             return super.hashCode();
@@ -63,6 +61,7 @@ public abstract class AbstractEntity implements Serializable {
     }
 
     @Override
+    @Transient
     public boolean equals(Object other) {
         if (isNew()) {
             // New entities are only equal if the instance if the same
@@ -78,7 +77,9 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
-    public long getVersion() {
+
+  /*
+  public long getVersion() {
         return version;
     }
 
@@ -86,6 +87,8 @@ public abstract class AbstractEntity implements Serializable {
         this.version = version;
     }
 
+    @Column(name = "creation_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getCreationTime() {
         return creationTime;
     }
@@ -94,28 +97,34 @@ public abstract class AbstractEntity implements Serializable {
         this.creationTime = creationTime;
     }
 
+    @Column(name = "modification_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getModificationTime() {
         return modificationTime;
     }
 
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
-    }
+    }*/
 
-//    loggs
-    public void info(String msg){
+    //    loggs
+    @Transient
+    public void info(String msg) {
         logger.info(msg);
     }
 
-    public void warn(String msg){
+    @Transient
+    public void warn(String msg) {
         logger.warn(msg);
     }
 
-    public void error(String msg){
+    @Transient
+    public void error(String msg) {
         logger.error(msg);
     }
 
-    public void debug(String msg){
+    @Transient
+    public void debug(String msg) {
         logger.debug(msg);
     }
 }

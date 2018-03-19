@@ -9,6 +9,7 @@ import java.util.List;
 //@RepositoryRestResource(collectionResourceRel = "department", path = "department")
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
+
 	List<Department> findByTitle(@Param("title") String title);
 
 }

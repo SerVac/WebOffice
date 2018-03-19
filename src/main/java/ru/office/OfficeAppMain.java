@@ -2,27 +2,16 @@ package ru.office;
 
 
 import org.springframework.boot.Banner;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import ru.office.config.DatabaseManagerSwingThread;
 import ru.office.dao.repository.DepartmentRepository;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 //@Configuration
 //@EnableAutoConfiguration()
@@ -30,7 +19,7 @@ import javax.servlet.ServletException;
 @EnableJpaRepositories(basePackageClasses = {
         DepartmentRepository.class
 })
-@SpringBootApplication()
+@SpringBootApplication
 //@SpringBootConfiguration
 @ComponentScan(basePackages = {
         "ru.office",
@@ -38,6 +27,9 @@ import javax.servlet.ServletException;
 })
 //@ComponentScan({"ru.office", "ru.office.service"})
 public class OfficeAppMain extends SpringBootServletInitializer {
+
+    public static final String ENCODING = "UTF-8";
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         application.headless(false);
