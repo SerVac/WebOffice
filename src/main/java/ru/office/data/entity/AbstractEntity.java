@@ -13,9 +13,6 @@ public abstract class AbstractEntity implements Serializable {
     @Transient
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
-//    @GeneratedValue(generator = TABLE_NAME+"_generator")
-
     private Long id;
     @Version
     private long version;
@@ -36,6 +33,8 @@ public abstract class AbstractEntity implements Serializable {
         modificationTime = new Date();
     }
 
+//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
+//    @GeneratedValue(generator = TABLE_NAME+"_generator")
     @Id @GeneratedValue
     public Long getId() {
         return id;
@@ -77,35 +76,6 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
-
-  /*
-  public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    @Column(name = "creation_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    @Column(name = "modification_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getModificationTime() {
-        return modificationTime;
-    }
-
-    public void setModificationTime(Date modificationTime) {
-        this.modificationTime = modificationTime;
-    }*/
 
     //    loggs
     @Transient
