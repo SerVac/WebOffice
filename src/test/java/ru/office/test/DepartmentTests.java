@@ -1,5 +1,6 @@
 package ru.office.test;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +18,16 @@ import org.springframework.web.context.WebApplicationContext;
 import ru.office.OfficeAppMain;
 import ru.office.config.BaseConfig;
 import ru.office.data.entity.Department;
+import ru.office.data.entity.Worker;
 import ru.office.service.DepartmentService;
+import ru.office.service.WorkerService;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.AssertTrue;
 import java.nio.charset.Charset;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 
 //@AutoConfigureMockMvc()
@@ -51,11 +58,25 @@ public class DepartmentTests {
     @Autowired
     private WebApplicationContext context;
 
-    @MockBean
+    @Autowired
+    private TestDataGenerator testDataGenerator;
+
+//    @MockBean
+@Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private WorkerService workerService;
 
     private final String DEPARTMENT_LOCATION = Department.TABLE_NAME;
     private final String REST_DEPARTMENT_LOCATION = "/" + DEPARTMENT_LOCATION;
+
+
+    @Before
+    public void setUp() {
+//        List<Worker> workerList = workerService.findAll();
+//        assertTrue(workerList.size() == 0);
+    }
+
 
 
    /*
@@ -70,6 +91,7 @@ public class DepartmentTests {
     public void shouldQueryEntity() throws Exception {
         String TITLE = "test_c1_office1_dep1";
         Department department = departmentService.get((long) 1);
+
 
        /*
        mockMvc.perform(get(REST_DEPARTMENT_LOCATION+"/1"))

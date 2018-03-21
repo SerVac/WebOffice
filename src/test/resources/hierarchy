@@ -1,0 +1,21 @@
+                    [company 1]
+       |                |                           |
+   [office 1]       [office 2]                  [office 3]
+       |                |                           |
+    [dep 1]          [dep 1]                     [dep 1]
+                    |        |                |               |
+               [dep 1_1], [dep 1_2]       [dep 1_1],      [dep 1_2]
+                                           |               |            |
+                                      [dep 1_1_1]    [dep 1_2_1],  [dep 1_2_2]
+
+
+
+                    [company 2]
+               |                   |
+           [office 1]         [office 2]
+               |          |        |        |
+            [dep 1]    [dep 1], [dep 2], [dep 3]
+               |
+           [dep 1_1]
+               |
+          [dep 1_1_1]

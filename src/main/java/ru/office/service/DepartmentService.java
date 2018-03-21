@@ -7,6 +7,7 @@ import ru.office.dao.repository.DepartmentRepository;
 import ru.office.data.entity.Department;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class DepartmentService extends CrudService<Department> {
@@ -19,11 +20,8 @@ public class DepartmentService extends CrudService<Department> {
         return repository;
     }
 
-    public DepartmentService() {
-        logger.info("I'm in department service");
+    public List<Department> findByCompanyId(long companyId){
+        return repository.findAllByCompanyId(companyId);
     }
 
-    /* public DepartmentService() {
-        super(Department.class);
-    }*/
 }
