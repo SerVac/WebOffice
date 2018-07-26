@@ -1,9 +1,8 @@
-package ru.office.data.entity;
+package ru.office.entity;
 
 import ru.office.dao.DefaultValues;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity

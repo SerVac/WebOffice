@@ -1,9 +1,8 @@
-package ru.office.data.entity;
+package ru.office.entity;
 
 import ru.office.dao.DefaultValues;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -18,8 +17,6 @@ public class Company extends AbstractEntity{
     title (unique)
     office_id
      */
-
-
     @Column(nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
 

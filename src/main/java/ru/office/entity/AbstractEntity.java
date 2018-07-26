@@ -1,6 +1,4 @@
-package ru.office.data.entity;
-
-import org.hibernate.annotations.Type;
+package ru.office.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,32 +9,34 @@ import java.util.Date;
 public abstract class AbstractEntity implements Serializable {
 
 
-//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
+    //    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
 //    @GeneratedValue(generator = TABLE_NAME+"_generator")
     @Id
     @GeneratedValue
     private Long id;
 
     @Version
-    private long version;
+    private long version = 0L;
 
     @Column(name = "creation_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    private Date creationTime = new Date();
 
     @Column(name = "modification_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modificationTime;
+    private Date modificationTime = new Date();
 
     @PrePersist
-    public void prePersist() {
+    public void onSave() {
+        System.out.println("On pre persist " + getId());
         Date now = new Date();
-        creationTime = new Date();
+        creationTime = now;
         modificationTime = now;
     }
 
     @PreUpdate
-    public void preUpdate() {
+    public void onUpdate() {
+        System.out.println("On PreUpdate " + getId());
         modificationTime = new Date();
     }
 
@@ -77,5 +77,23 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
+    public long getVersion() {
+        return version;
+    }
 
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 }

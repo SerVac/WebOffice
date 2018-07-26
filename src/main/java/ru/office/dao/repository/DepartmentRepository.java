@@ -2,7 +2,7 @@ package ru.office.dao.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import ru.office.data.entity.Department;
+import ru.office.entity.Department;
 
 import java.util.List;
 

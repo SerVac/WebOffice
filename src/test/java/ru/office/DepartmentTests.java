@@ -4,41 +4,48 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import ru.office.data.entity.Department;
-import ru.office.service.CrudService;
+import ru.office.entity.Department;
 import ru.office.service.DepartmentService;
 
-import javax.transaction.Transactional;
+import javax.annotation.Resource;
 import java.nio.charset.Charset;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc()
-@Transactional
+//@Transactional
 //@ContextConfiguration(classes = {DepartmentService.class, Department.class, CrudService.class})
+@SpringBootTest
+@DataJpaTest
+@Import({AppTestConfiguration.class, DepartmentService.class})
+@PropertySource(value = {"classpath:/application-test.properties"}, encoding = "UTF-8")
+//@FixMethodOrder(MethodSorters.DEFAULT)
 public class DepartmentTests {
 
 
-    @Autowired
-    private MockMvc mockMvc;
+//    @Autowired
+//    private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext context;
+//        @Autowired
+//    @Resource
+//    private WebApplicationContext context;
 
-    @MockBean
+//    @Mock
+    @Autowired
     private DepartmentService departmentService;
 
     private final String DEPARTMENT_LOCATION = Department.TABLE_NAME;
@@ -48,26 +55,28 @@ public class DepartmentTests {
 //    private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
 
-    @Before
-    public void setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-    }
+//    @Before
+//    public void setUp() {
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+//    }
 
 
-/*
-    @Before
-    public void deleteAllBeforeTests() throws Exception {
-        companyRepository.deleteAll();
-    }
-*/
-private MediaType contentType = new MediaType("application", "hal+json", Charset.forName("UTF-8"));
+    /*
+        @Before
+        public void deleteAllBeforeTests() throws Exception {
+            companyRepository.deleteAll();
+        }
+    */
+    private MediaType contentType = new MediaType("application", "hal+json", Charset.forName("UTF-8"));
 
     @Test
     public void shouldQueryEntity() throws Exception {
-        String TITLE = "test_c1_office1_dep1";
-        Department department = departmentService.get((long)1);
+//        mockMvc.perform(get("/todo/add"));
 
-       /* mockMvc.perform(get(REST_DEPARTMENT_LOCATION+"/1"))
+        String TITLE = "test_c1_office1_dep1";
+        Department department = departmentService.get((long) 1);
+
+      /*  mockMvc.perform(get(REST_DEPARTMENT_LOCATION+"/1"))
 //                .andExpect(content().contentType(contentType))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..@", hasSize(0)))
@@ -75,7 +84,7 @@ private MediaType contentType = new MediaType("application", "hal+json", Charset
 
     }
 
-    @Test
+ /*   @Test
     public void findByTitle() throws Exception {
         String TITLE = "test_c1_office1_dep1";
         mockMvc.perform(
@@ -86,7 +95,7 @@ private MediaType contentType = new MediaType("application", "hal+json", Charset
                                 .value(TITLE)
                 );
     }
-
+*/
 
 
   /* @Autowired
