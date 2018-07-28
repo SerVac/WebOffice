@@ -14,9 +14,6 @@ import ru.office.config.DatabaseManagerSwingThread;
 
 import javax.annotation.PostConstruct;
 
-//@Configuration
-//@EnableAutoConfiguration()
-//@SpringBootConfiguration
 @EnableAutoConfiguration
 @SpringBootApplication(scanBasePackages = "ru.office")
 @EntityScan(basePackages = {"ru.office.entity"})

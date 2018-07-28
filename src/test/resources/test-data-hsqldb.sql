@@ -24,28 +24,27 @@ INSERT INTO department(title, office_id, main_department_id, creation_time, modi
 VALUES('test_c1_office1_dep1', 1, null, CURRENT_DATE, CURRENT_DATE, 0); -- 1
 -- department 1  - sub departments 1  (office 2)
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep1_1', 2, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 2
+VALUES('test_c1_office1_dep1_1', 2, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 2
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep1_2', 2, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 3
+VALUES('test_c1_office1_dep1_2', 2, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 3
 -- department 1  - sub departments 1 - sub departments 2 (office 3)
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep1_2_1', 3, 3, CURRENT_DATE, CURRENT_DATE, 0); -- 4
+VALUES('test_c1_office1_dep1_2_1', 3, 3, CURRENT_DATE, CURRENT_DATE, 0); -- 4
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep1_2_2', 3, 3, CURRENT_DATE, CURRENT_DATE, 0); -- 5
+VALUES('test_c1_office1_dep1_2_2', 3, 3, CURRENT_DATE, CURRENT_DATE, 0); -- 5
 -- department 1  - sub departments 1 (office 4)
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep1_3', 4, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 6
+VALUES('test_c1_office1_dep1_3', 4, 1, CURRENT_DATE, CURRENT_DATE, 0); -- 6
 -- department 1  - sub departments 1 (office 5)
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep2',  5, null, CURRENT_DATE, CURRENT_DATE, 0); -- 7
+VALUES('test_c1_office1_dep2',  5, null, CURRENT_DATE, CURRENT_DATE, 0); -- 7
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep3',  6, null, CURRENT_DATE, CURRENT_DATE, 0); -- 8
+VALUES('test_c1_office1_dep3',  6, null, CURRENT_DATE, CURRENT_DATE, 0); -- 8
 -- department 1  - sub departments 1 (office 6)
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep3_1', 7, 8, CURRENT_DATE, CURRENT_DATE, 0); -- 9
+VALUES('test_c1_office1_dep3_1', 7, 8, CURRENT_DATE, CURRENT_DATE, 0); -- 9
 INSERT INTO department(title, office_id, main_department_id, creation_time, modification_time, version)
-VALUES('c1_office1_dep3_2', 7, 8, CURRENT_DATE, CURRENT_DATE, 0); -- 10
-
+VALUES('test_c1_office1_dep3_2', 7, 8, CURRENT_DATE, CURRENT_DATE, 0); -- 10
 
 -- department 1 workers
 INSERT INTO worker(name, middle_name, last_name, email, birth_date, department_id, creation_time, modification_time, version)
