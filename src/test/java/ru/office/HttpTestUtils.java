@@ -12,6 +12,7 @@ import org.apache.http.message.BasicHeader;
 import org.assertj.core.util.Lists;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,21 +64,25 @@ public class HttpTestUtils {
         return client.execute(request);
     }
 
+
     //
-    public static HttpResponse httpApiGet(WebAPI apiPath) throws IOException {
-        return HttpTestUtils.httpGet(apiMap.get(apiPath));
+    public static HttpResponse httpApiGet(WebAPI baseApiPath, String... path) throws IOException {
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append(apiMap.get(baseApiPath));
+        Arrays.stream(path).forEach(s -> strBuilder.append(s));
+        return HttpTestUtils.httpGet(strBuilder.toString());
     }
 
-    public static HttpResponse httpApiDelete(WebAPI apiPath) throws IOException {
-        return HttpTestUtils.httpDelete(apiMap.get(apiPath));
+    public static HttpResponse httpApiDelete(WebAPI baseApiPath) throws IOException {
+        return HttpTestUtils.httpDelete(apiMap.get(baseApiPath));
     }
 
-    public static HttpResponse httpApiPut(WebAPI apiPath, String jsonPayload) throws IOException {
-        return HttpTestUtils.httpPut(apiMap.get(apiPath), jsonPayload);
+    public static HttpResponse httpApiPut(WebAPI baseApiPath, String jsonPayload) throws IOException {
+        return HttpTestUtils.httpPut(apiMap.get(baseApiPath), jsonPayload);
     }
 
-    public static HttpResponse httpApiPost(WebAPI apiPath, String jsonPayload) throws IOException {
-        return HttpTestUtils.httpPost(apiMap.get(apiPath), jsonPayload);
+    public static HttpResponse httpApiPost(WebAPI baseApiPath, String jsonPayload) throws IOException {
+        return HttpTestUtils.httpPost(apiMap.get(baseApiPath), jsonPayload);
     }
 
     //
