@@ -62,7 +62,7 @@ public class DepartmentTests {
     private TestDataGenerator testDataGenerator;
 
 //    @MockBean
-@Autowired
+    @Autowired
     private DepartmentService departmentService;
     @Autowired
     private WorkerService workerService;

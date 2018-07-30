@@ -20,7 +20,7 @@ public class DepartmentService extends CrudService<Department> {
         return repository;
     }
 
-    public List<Department> findByCompanyId(long companyId){
+    public List<Department> findAllByCompanyId(long companyId){
         return repository.findAllByCompanyId(companyId);
     }
 
