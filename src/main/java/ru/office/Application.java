@@ -14,15 +14,16 @@ import ru.office.config.DatabaseManagerSwingThread;
 
 import javax.annotation.PostConstruct;
 
-@EnableAutoConfiguration
+
+//@EnableAutoConfiguration
 @SpringBootApplication(scanBasePackages = "ru.office")
-@EntityScan(basePackages = {"ru.office.data.entity"})
+@EntityScan(basePackages = {"ru.office.entity"})
 @EnableJpaRepositories(basePackages = "ru.office.dao.repository")
 @ComponentScan(basePackages = {
         "ru.office",
         "ru.office.service"
 })
-@PropertySource(value = {"classpath:/application.properties"}, encoding = "UTF-8")
+@PropertySource(value = {"classpath:/application.properties"}, encoding = Application.ENCODING)
 public class Application extends SpringBootServletInitializer {
 
     public static final String ENCODING = "UTF-8";

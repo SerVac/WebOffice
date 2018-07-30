@@ -1,4 +1,4 @@
-package ru.office.test;
+package ru.office;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +52,7 @@ public class TestDataGenerator {
         strBuilder.setLength(0);
 
         long companyId = office.getCompany().getId();
+        logger.info("Office: "+office.getTitle()+" / Company: "+office.getCompany().getTitle());
         strBuilder.append("c_");
         strBuilder.append(companyId);
         strBuilder.append("-");
@@ -76,8 +77,8 @@ public class TestDataGenerator {
             workerId++;
             Worker worker = new Worker();
             worker.setName(prefixWorker + workerId);
-            worker.setMiddleName(worker.getName() + "-middle");
-            worker.setLastName(worker.getName() + "-last");
+            worker.setMiddleName(worker.getName() + "-middle-"+workerId);
+            worker.setLastName(worker.getName() + "-last-"+workerId);
             worker.setEmail(worker.getName() + "@weboffice.com");
             worker.setBirthDate(rndBirthDate());
             worker.setDepartment(department);

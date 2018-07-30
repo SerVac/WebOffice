@@ -3,6 +3,7 @@ package ru.office;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ import java.util.Set;
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @PropertySource(value = {"classpath:/application-test.properties"}, encoding = "UTF-8")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {"management.port=0"})
-public class DepartmentsTests {
+public class DepartmentsRESTTests {
 
     @LocalServerPort
     private int port;
@@ -40,19 +41,26 @@ public class DepartmentsTests {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
+    private TestDataGenerator testDataGenerator;
+
+    @Autowired
     private DepartmentService departmentService;
 
-    String host = "http://localhost:8080/";
-    String departmentsURL = host + "departments";
+
+    @Before
+    public void setUp(){
+        HttpTestUtils.generateApiMap("http://localhost:"+this.port);
+    }
 
     @Test
     public void getDepartment() throws Exception {
         List<Department> departments = departmentService.findAll();
 
-        ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(departmentsURL, Map.class);
-        Set<Map.Entry> entry = entity.getBody().entrySet();
+        String allDepartmentsURL = HttpTestUtils.apiMap.get(HttpTestUtils.WebAPI.ALL_DEPARTMENTS);
+        ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(allDepartmentsURL, Map.class);
+        Set entry = entity.getBody().entrySet();
 
-        HttpResponse response = HttpTestUtils.httpGet(departmentsURL);
+        HttpResponse response = HttpTestUtils.httpApiGet(HttpTestUtils.WebAPI.ALL_DEPARTMENTS);
         HttpEntity respEntity = response.getEntity();
         String responseString = EntityUtils.toString(respEntity, "UTF-8");
     }

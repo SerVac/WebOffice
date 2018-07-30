@@ -1,4 +1,4 @@
-package ru.office.data.entity;
+package ru.office.entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +13,7 @@ public abstract class AbstractEntity implements Serializable {
     @Transient
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Id @GeneratedValue
     private Long id;
 
     @Version
@@ -40,9 +41,7 @@ public abstract class AbstractEntity implements Serializable {
         modificationTime = new Date();
     }
 
-//    @SequenceGenerator(name = TABLE_NAME+"_generator", sequenceName = TABLE_NAME+"_sequence")
-//    @GeneratedValue(generator = TABLE_NAME+"_generator")
-    @Id @GeneratedValue
+
     public Long getId() {
         return id;
     }
@@ -81,6 +80,10 @@ public abstract class AbstractEntity implements Serializable {
             return false;
         }
         return id.equals(((AbstractEntity) other).id);
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 
     public long getVersion() {

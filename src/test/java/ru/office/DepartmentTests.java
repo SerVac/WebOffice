@@ -1,4 +1,4 @@
-package ru.office.test;
+package ru.office;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
-import ru.office.Application;
 import ru.office.config.BaseConfig;
 import ru.office.entity.Department;
 import ru.office.service.DepartmentService;

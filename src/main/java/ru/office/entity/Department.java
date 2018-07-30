@@ -1,6 +1,7 @@
 package ru.office.entity;
 
 import ru.office.config.DefaultValues;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,18 +22,28 @@ public class Department extends AbstractEntity {
     title
     address
      */
-
+    @Column(name = "title", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "office_id", nullable = false)
     private Office office;
+
+    @ManyToOne
+    @JoinColumn(name = "main_department_id")
     private Department mainDepartment;
+
+    @OneToMany(targetEntity=Department.class, fetch = FetchType.LAZY, mappedBy = "mainDepartment", cascade = CascadeType.ALL)
     private Set<Department> subDepartments = new HashSet<Department>();
+
+    @OneToMany(targetEntity=Worker.class, fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     private Set<Worker> workers;
 
     public Department() {
     }
 
     //	GET/SET
-    @Column(name = "title", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
+
     public String getTitle() {
         return title;
     }
@@ -41,8 +52,6 @@ public class Department extends AbstractEntity {
         this.title = title;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "office_id", nullable = false)
     public Office getOffice() {
         return office;
     }
@@ -51,8 +60,6 @@ public class Department extends AbstractEntity {
         this.office = office;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "main_department_id")
     public Department getMainDepartment() {
         return mainDepartment;
     }
@@ -61,7 +68,6 @@ public class Department extends AbstractEntity {
         this.mainDepartment = mainDepartment;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mainDepartment", cascade = CascadeType.ALL)
     public Set<Department> getSubDepartments() {
         return subDepartments;
     }
@@ -70,7 +76,6 @@ public class Department extends AbstractEntity {
         this.subDepartments = subDepartments;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     public Set<Worker> getWorkers() {
         return workers;
     }

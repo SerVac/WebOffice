@@ -12,11 +12,15 @@ import org.apache.http.message.BasicHeader;
 import org.assertj.core.util.Lists;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class TestUtils {
+public class HttpTestUtils {
+    private static String host = "http://localhost:8080";
+    public final static Map<WebAPI, String> apiMap = new HashMap<WebAPI, String>();
 
-    public static HttpClient client;
+    private static HttpClient client;
 
     static {
         Header contentTypeHeader = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
@@ -59,4 +63,34 @@ public class TestUtils {
         return client.execute(request);
     }
 
+    //
+    public static HttpResponse httpApiGet(WebAPI apiPath) throws IOException {
+        return HttpTestUtils.httpGet(apiMap.get(apiPath));
+    }
+
+    public static HttpResponse httpApiDelete(WebAPI apiPath) throws IOException {
+        return HttpTestUtils.httpDelete(apiMap.get(apiPath));
+    }
+
+    public static HttpResponse httpApiPut(WebAPI apiPath, String jsonPayload) throws IOException {
+        return HttpTestUtils.httpPut(apiMap.get(apiPath), jsonPayload);
+    }
+
+    public static HttpResponse httpApiPost(WebAPI apiPath, String jsonPayload) throws IOException {
+        return HttpTestUtils.httpPost(apiMap.get(apiPath), jsonPayload);
+    }
+
+    //
+    public enum WebAPI {
+        ALL_DEPARTMENTS
+    }
+
+    public static void generateApiMap(String host) {
+        HttpTestUtils.host = host;
+        apiMap.put(WebAPI.ALL_DEPARTMENTS, getHost() + "/departments");
+    }
+
+    public static String getHost() {
+        return HttpTestUtils.host;
+    }
 }

@@ -20,15 +20,20 @@ public class Office extends AbstractEntity {
     department_id
     company_id
      */
+    @Column(name = "title", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
+    @OneToMany(targetEntity=Department.class, fetch = FetchType.LAZY, mappedBy = "office", cascade = CascadeType.ALL)
     private Set<Department> departments;
 
     public Office() {
     }
 
     //	GET/SET
-    @Column(name = "title", nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     public String getTitle() {
         return title;
     }
@@ -37,8 +42,6 @@ public class Office extends AbstractEntity {
         this.title = title;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
     public Company getCompany() {
         return company;
     }
@@ -47,7 +50,6 @@ public class Office extends AbstractEntity {
         this.company = company;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office", cascade = CascadeType.ALL)
     public Set<Department> getDepartments() {
         return departments;
     }

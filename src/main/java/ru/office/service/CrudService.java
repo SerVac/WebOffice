@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
 import ru.office.entity.AbstractEntity;
-//import ru.office.data.entity.AbstractEntity;
 import ru.office.service.exception.NotFoundException;
 import ru.office.service.utils.MsgFormatter;
 
@@ -50,7 +49,7 @@ public abstract class CrudService<T extends AbstractEntity> {
     }
 
     @Transactional
-    public void delete(long id) {
+    public void delete(long id) throws NotFoundException {
         try {
             get(id);
         } catch (NotFoundException e) {
@@ -98,4 +97,5 @@ public abstract class CrudService<T extends AbstractEntity> {
     public void debug(String msg){
         logger.debug(msg);
     }
+
 }
