@@ -8,38 +8,26 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
-import ru.office.OfficeAppMain;
+import ru.office.Application;
 import ru.office.config.BaseConfig;
-import ru.office.data.entity.Department;
-import ru.office.data.entity.Worker;
+import ru.office.entity.Department;
 import ru.office.service.DepartmentService;
 import ru.office.service.WorkerService;
 
-import javax.transaction.Transactional;
-import javax.validation.constraints.AssertTrue;
 import java.nio.charset.Charset;
-import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-
-
-//@AutoConfigureMockMvc()
-//@Transactional
-//@ContextConfiguration(classes = {DepartmentService.class, Department.class, CrudService.class})
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @DataJpaTest
 @Import({BaseConfig.class})
-@PropertySource(value = {"classpath:/application-test.properties"}, encoding = OfficeAppMain.ENCODING)
+@PropertySource(value = {"classpath:/application-test.properties"}, encoding = Application.ENCODING)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentTests {
 

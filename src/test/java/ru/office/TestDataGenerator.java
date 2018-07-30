@@ -4,17 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.office.data.entity.Department;
-import ru.office.data.entity.Office;
-import ru.office.data.entity.Worker;
-import ru.office.service.DepartmentService;
-import ru.office.service.WorkerService;
-
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import ru.office.entity.*;
+import ru.office.service.*;
+
 
 @Component
 public class TestDataGenerator {
@@ -33,7 +31,7 @@ public class TestDataGenerator {
 
     @PostConstruct
     public void PostInit() {
-        logger.info("Test data generator");
+        logger.info("Test data generator started");
 
         int minWorkers = 1;
         int maxWorkers = 10;
@@ -44,9 +42,7 @@ public class TestDataGenerator {
             generateWorkers(department, minWorkers, maxWorkers);
         }
 
-
 //        List<Department> departmentList2 = departmentRepository.findAll();
-
 
     }
 

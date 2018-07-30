@@ -17,6 +17,7 @@ public class Company extends AbstractEntity{
     title (unique)
     office_id
      */
+    @Column(nullable = false, unique = true, length = DefaultValues.MAX_LENGTH_TITLE)
     private String title;
     private Set<Office> offices;
 

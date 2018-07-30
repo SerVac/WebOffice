@@ -3,7 +3,8 @@ package ru.office.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
-import ru.office.data.entity.AbstractEntity;
+import ru.office.entity.AbstractEntity;
+//import ru.office.data.entity.AbstractEntity;
 import ru.office.service.exception.NotFoundException;
 import ru.office.service.utils.MsgFormatter;
 
@@ -50,6 +51,13 @@ public abstract class CrudService<T extends AbstractEntity> {
 
     @Transactional
     public void delete(long id) {
+        try {
+            get(id);
+        } catch (NotFoundException e) {
+            logger.warn("Can't delete entity for type [" + this.getClass().getSimpleName() + "] by Id=" + id);
+            logger.warn(e.getMessage());
+            throw e;
+        }
         getRepository().delete(id);
     }
 

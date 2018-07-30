@@ -14,22 +14,29 @@ public abstract class AbstractEntity implements Serializable {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     private Long id;
+
     @Version
-    private long version;
-    @Column(name = "creation_time")
-    private Date creationTime;
-    @Column(name = "modification_time")
-    private Date modificationTime;
+    private long version = 0L;
+
+    @Column(name = "creation_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime = new Date();
+
+    @Column(name = "modification_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificationTime = new Date();
 
     @PrePersist
-    public void prePersist() {
+    public void onSave() {
+        System.out.println("On pre persist " + getId());
         Date now = new Date();
-        creationTime = new Date();
+        creationTime = now;
         modificationTime = now;
     }
 
     @PreUpdate
-    public void preUpdate() {
+    public void onUpdate() {
+        System.out.println("On PreUpdate " + getId());
         modificationTime = new Date();
     }
 
@@ -76,6 +83,25 @@ public abstract class AbstractEntity implements Serializable {
         return id.equals(((AbstractEntity) other).id);
     }
 
+    public long getVersion() {
+        return version;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 
     //    loggs
     @Transient

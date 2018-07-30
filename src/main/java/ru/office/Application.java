@@ -2,31 +2,28 @@ package ru.office;
 
 
 import org.springframework.boot.Banner;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import ru.office.config.DatabaseManagerSwingThread;
-import ru.office.dao.repository.DepartmentRepository;
 
 import javax.annotation.PostConstruct;
 
-//@Configuration
-//@EnableAutoConfiguration()
+@EnableAutoConfiguration
+@SpringBootApplication(scanBasePackages = "ru.office")
 @EntityScan(basePackages = {"ru.office.data.entity"})
-@EnableJpaRepositories(basePackageClasses = {
-        DepartmentRepository.class
-})
-@SpringBootApplication
-//@SpringBootConfiguration
+@EnableJpaRepositories(basePackages = "ru.office.dao.repository")
 @ComponentScan(basePackages = {
         "ru.office",
         "ru.office.service"
 })
-//@ComponentScan({"ru.office", "ru.office.service"})
-public class OfficeAppMain extends SpringBootServletInitializer {
+@PropertySource(value = {"classpath:/application.properties"}, encoding = "UTF-8")
+public class Application extends SpringBootServletInitializer {
 
     public static final String ENCODING = "UTF-8";
 
@@ -34,7 +31,7 @@ public class OfficeAppMain extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         application.headless(false);
         application.bannerMode(Banner.Mode.OFF);
-        return application.sources(OfficeAppMain.class);
+        return application.sources(Application.class);
     }
 
     @PostConstruct

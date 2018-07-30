@@ -1,4 +1,4 @@
-package ru.office.data.entity;
+package ru.office.entity;
 
 import ru.office.config.DefaultValues;
 import javax.persistence.*;
