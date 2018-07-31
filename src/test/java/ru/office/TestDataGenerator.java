@@ -16,6 +16,25 @@ import ru.office.service.*;
 
 @Component
 public class TestDataGenerator {
+    public static final String PAGE = "page";
+    public static final String TOTAL_ELEMENTS = "totalElements";
+    public static final String EMBEDDED = "_embedded";
+    public static final String LINKS = "_links";
+    public static final String SELF = "self";
+
+    public static final String ID = "id";
+    public static final String CREATION_TIME = "creationTime";
+    public static final String MODIFICATION_TIME = "modificationTime";
+    public static final String NEW = "new";
+    public static final String TITLE = "title";
+
+    public static final String WORKERS = "workers";
+
+    public static final String DEPARTMENTS = "departments";
+    public static final String MAIN_DEPARTMENT = "mainDepartment";
+    public static final String SUB_DEPARTMENTS = "subDepartments";
+
+
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     private WorkerService workerService;

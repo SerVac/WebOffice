@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ru.office.TestDataGenerator.DEPARTMENTS;
+
 public class HttpTestUtils {
     private static String host = "http://localhost:8080";
     public final static Map<WebAPI, String> apiMap = new HashMap<WebAPI, String>();
@@ -92,7 +94,7 @@ public class HttpTestUtils {
 
     public static void generateApiMap(String host) {
         HttpTestUtils.host = host;
-        apiMap.put(WebAPI.ALL_DEPARTMENTS, getHost() + "/departments");
+        apiMap.put(WebAPI.ALL_DEPARTMENTS, getHost() + "/"+DEPARTMENTS);
     }
 
     public static String getHost() {
